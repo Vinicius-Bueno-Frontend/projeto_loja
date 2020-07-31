@@ -39,8 +39,8 @@ class Contato{
 
     }
 
-    public function alterarEmail(){
-        $query = "update contato set email=:e where idcontato=:id";
+    public function alterarContato(){
+        $query = "update contato set email=:e, telefone=:t where idcontato=:id";
 
         $stmt = $this->conexao->prepare($query);
 
@@ -48,24 +48,6 @@ class Contato{
         banco de dados
         */
         $stmt->bindParam(":e",$this->email);
-        $stmt->bindParam(":id",$this->idcontato);
-
-        if($stmt->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function alterarTelefone(){
-        $query = "update contato set telefone=:t where idcontato=:id";
-
-        $stmt = $this->conexao->prepare($query);
-
-        /*Vamos vincular os dados que veem do app ou navegador com os campos de
-        banco de dados
-        */
         $stmt->bindParam(":t",$this->telefone);
         $stmt->bindParam(":id",$this->idcontato);
 

@@ -14,12 +14,12 @@ header("Access-Control-Allow-Methods:PUT");
 
 include_once "../../config/database.php";
 
-include_once "../../domain/contato.php";
+include_once "../../domain/endereco.php";
 
 $database = new Database();
 $db = $database->getConnection();
 
-$contato = new Contato($db);
+$endereco = new Endereco($db);
 
 /*
 O cliente irá enviar os dado no formato Json. Porém
@@ -31,19 +31,26 @@ O cliente irá enviar os dado no formato Json. Porém
 $data = json_decode(file_get_contents("php://input"));
 
 #Verificar se os dados vindos do usuário estão preenchidos
-if(!empty($data->telefone) && !empty($data->idcontato)){
+if(!empty($data->tipo) && !empty($data->logradouro) && !empty($data->numero)
+&& !empty($data->complemento) && !empty($data->bairro) && !empty($data->cep)
+&& !empty($data->idendereco)){
 
-    $contato->telefone = $data->telefone;
-    $contato->idcontato = $data->idcontato;
+    $endereco->tipo = $data->tipo;
+    $endereco->logradouro = $data->logradouro;
+    $endereco->numero = $data->numero;
+    $endereco->complemento = $data->complemento;
+    $endereco->bairro = $data->bairro;
+    $endereco->cep = $data->cep;
+    $endereco->idendereco = $data->idendereco;
 
 
-    if($contato->alterarTelefone()){
+    if($endereco->alterarEndereco()){
         header("HTTP/1.0 201");
-        echo json_encode(array("mensagem"=>"Telefone alterado com sucesso!"));
+        echo json_encode(array("mensagem"=>"Endereço alterado com sucesso!"));
     }
     else{
         header("HTTP/1.0 400");
-        echo json_encode(array("mensagem"=>"Não foi possível alterar o telefone."));
+        echo json_encode(array("mensagem"=>"Não foi possível alterar o endereço."));
     }
 }
 else{
