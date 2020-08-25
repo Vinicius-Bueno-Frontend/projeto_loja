@@ -90,7 +90,7 @@ ao final
         $array_item = array(
             "idcliente"=> $idcliente,
             "idpedido"=> $idpedido,
-            "datapedido"=> $datapedido,
+            "datapedido"=> $datapedido, 
             "nomeproduto"=> $nomeproduto,
             "preco"=> $preco,
             "quantidade"=> $quantidade,
